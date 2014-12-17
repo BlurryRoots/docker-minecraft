@@ -1,44 +1,37 @@
-# -----------------------------------------------------------------------------
-# docker-minecraft
-#
-# Builds a basic docker image that can run a Minecraft server
-# (http://minecraft.net/).
-#
-# Authors: Isaac Bythewood
-# Updated: Dec 14th, 2014
-# Require: Docker (http://www.docker.io/)
-# -----------------------------------------------------------------------------
-
-
-# Base system is the LTS version of Ubuntu.
-FROM   ubuntu:14.04
-
+# Base image
+FROM ubuntu:14.04
 
 # Make sure we don't get notifications we can't answer during building.
-ENV    DEBIAN_FRONTEND noninteractive
-
+ENV DEBIAN_FRONTEND noninteractive
 
 # Download and install everything from the repos.
-RUN    apt-get --yes update; apt-get --yes upgrade; apt-get --yes install software-properties-common
-RUN    sudo apt-add-repository --yes ppa:webupd8team/java; apt-get --yes update
-RUN    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections  && \
-       echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections  && \
-       apt-get --yes install curl oracle-java8-installer
+RUN apt-get -y update
+RUN apt-get -y upgrade
+RUN apt-get install -y software-properties-common
+RUN apt-get install -y curl
+RUN sudo apt-add-repository -y ppa:webupd8team/java && apt-get -y update
+RUN echo debconf shared/accepted-oracle-license-v1-1 select true \
+	| debconf-set-selections && \
+	echo debconf shared/accepted-oracle-license-v1-1 seen true \
+	| debconf-set-selections  && \
+	apt-get -y install oracle-java8-installer
 
+# Which version of the server should be downloaded
+ENV srv_v "1.8.1"
+ENV srv_url_base "https://s3.amazonaws.com/Minecraft.Download/versions"
+ENV srv_url "$srv_url_base/$srv_v/minecraft_server.$srv_v.jar"
 
-# Load in all of our config files.
-ADD    ./scripts/start /start
+# How much memory should the server use
+ENV srv_mem 768M
 
-
-# Fix all permissions
-RUN    chmod +x /start
-
+# Create data folder and download server
+RUN mkdir /data
+RUN test curl $srv_url -o /data/minecraft_server.jar
+# Mark data folder as volume
+VOLUME /data
 
 # 25565 is for minecraft
 EXPOSE 25565
 
-# /data contains static files and database
-VOLUME ["/data"]
-
-# /start runs it.
-CMD    ["/start"]
+# Start the server with previously set memory limit
+ENTRYPOINT java -Xmx${srv_mem} -jar minecraft_server.jar nogui
