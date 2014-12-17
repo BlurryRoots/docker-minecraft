@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# create named container with linked path off of image
+docker create --name="$1" -d=true -p=25565:25565 -v=$2:/data $3
