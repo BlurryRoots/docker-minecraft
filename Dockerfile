@@ -26,7 +26,7 @@ ENV srv_mem 768M
 
 # Create data folder and download server
 RUN mkdir /data
-RUN wget -A.jar "$srv_url" -O /data/minecraft_server.jar
+RUN wget -A.jar "$srv_url" -O /server/minecraft_server.jar
 # Mark data folder as volume
 VOLUME /data
 
@@ -34,4 +34,4 @@ VOLUME /data
 EXPOSE 25565
 
 # Start the server with previously set memory limit
-ENTRYPOINT java -Xmx${srv_mem} -jar /data/minecraft_server.jar nogui
+ENTRYPOINT /data/./entrypoint.sh
