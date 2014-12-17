@@ -35,6 +35,8 @@ RUN wget -A.zip "$map_url" -O /server/map.zip
 # Mark data folder as volume
 VOLUME /data
 
+RUN apt-get install -y unzip
+
 # Expose standard server port
 EXPOSE 25565
 
