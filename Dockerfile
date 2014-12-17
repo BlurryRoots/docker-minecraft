@@ -34,4 +34,4 @@ VOLUME /data
 EXPOSE 25565
 
 # Start the server with previously set memory limit
-ENTRYPOINT java -Xmx${srv_mem} -jar minecraft_server.jar nogui
+ENTRYPOINT java -Xmx${srv_mem} -jar /data/minecraft_server.jar nogui
