@@ -26,7 +26,7 @@ ENV srv_mem 768M
 
 # Create data folder and download server
 RUN mkdir /data
-RUN wget $srv_url -O /data/minecraft_server.jar
+RUN wget -A.jar $srv_url -O /data/minecraft_server.jar
 # Mark data folder as volume
 VOLUME /data
 
