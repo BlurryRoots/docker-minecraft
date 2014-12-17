@@ -17,8 +17,8 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true \
 RUN apt-get install -y wget
 
 # Which version of the server should be downloaded
-ENV srv_v "1.8.1"
-ENV srv_url_base "https://s3.amazonaws.com/Minecraft.Download/versions"
+ENV srv_v 1.8.1
+ENV srv_url_base https://s3.amazonaws.com/Minecraft.Download/versions
 ENV srv_url "$srv_url_base/$srv_v/minecraft_server.$srv_v.jar"
 
 # How much memory should the server use
