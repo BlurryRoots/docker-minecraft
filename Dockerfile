@@ -26,7 +26,7 @@ ENV srv_mem 768M
 
 # Create data folder and download server
 RUN mkdir /data
-RUN test curl $srv_url -o /data/minecraft_server.jar
+RUN curl $srv_url -o /data/minecraft_server.jar
 # Mark data folder as volume
 VOLUME /data
 
