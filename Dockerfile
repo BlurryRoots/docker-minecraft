@@ -19,14 +19,14 @@ RUN apt-get install -y wget
 # Which version of the server should be downloaded
 ENV srv_v 1.8.1
 ENV srv_url_base https://s3.amazonaws.com/Minecraft.Download/versions
-ENV srv_url '$srv_url_base/$srv_v/minecraft_server.$srv_v.jar'
+ENV srv_url $srv_url_base/$srv_v/minecraft_server.$srv_v.jar
 
 # How much memory should the server use
 ENV srv_mem 768M
 
 # Create data folder and download server
 RUN mkdir /data
-RUN wget -A.jar $srv_url -O /data/minecraft_server.jar
+RUN wget -A.jar "$srv_url" -O /data/minecraft_server.jar
 # Mark data folder as volume
 VOLUME /data
 
