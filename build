@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Build base image with given name
+docker build -t "$1" .
