@@ -1,1 +1,17 @@
-[]
+[
+	{
+		"uuid": "6e508d94-75ce-424b-aeee-32aa329734e9",
+		"name": "koiz",
+  		"level": 4
+	},
+	{
+		"uuid": "e2079fc3-71e0-43d9-a021-1024eefe604f",
+		"name": "Poeddl",
+		"level": 4
+	},
+	{
+		"uuid": "023791d9-21ec-4b84-bc29-97a60d019d04",
+		"name": "schottenrock",
+		"level": 4
+	}
+]
