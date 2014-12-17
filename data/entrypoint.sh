@@ -4,4 +4,4 @@
 (test -f /data/minecraft_server.jar || \
 	echo "copying server" && cp /server/minecraft_server.jar /data) && \
 	# And run the server
-	java -Xmx${srv_mem} -jar /data/minecraft_server.jar nogui
+	java -Xmx${srv_mem} -jar minecraft_server.jar nogui

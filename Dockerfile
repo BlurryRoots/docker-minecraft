@@ -30,8 +30,9 @@ RUN wget -A.jar "$srv_url" -O /server/minecraft_server.jar
 # Mark data folder as volume
 VOLUME /data
 
-# 25565 is for minecraft
+# Expose standard server port
 EXPOSE 25565
 
+WORKDIR /data
 # Start the server with previously set memory limit
 ENTRYPOINT /data/./entrypoint.sh
