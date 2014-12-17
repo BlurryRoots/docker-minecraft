@@ -24,9 +24,14 @@ ENV srv_url $srv_url_base/$srv_v/minecraft_server.$srv_v.jar
 # How much memory should the server use
 ENV srv_mem 768M
 
+# Where can i find the map
+ENV map_v Beta1_6
+ENV map_url http://thefarlanders.com/s/Captive-Minecraft-$map_v.zip
+
 # Create data folder and download server
 RUN mkdir /server
 RUN wget -A.jar "$srv_url" -O /server/minecraft_server.jar
+RUN wget -A.zip "$map_url" -O /server/map.zip
 # Mark data folder as volume
 VOLUME /data
 
