@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # start container with name as first parameter
-docker start $1
+docker start "$1"
