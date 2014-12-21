@@ -14,25 +14,30 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true \
 	echo debconf shared/accepted-oracle-license-v1-1 seen true \
 	| debconf-set-selections  && \
 	apt-get -y install oracle-java8-installer
-RUN apt-get install -y wget
+RUN apt-get install -y wget unzip
 
 # Which version of the server should be downloaded
 ENV srv_v 1_1_2
 ENV srv_url_base http://www.creeperrepo.net/FTB2/modpacks
 ENV srv_url $srv_url_base%5EMagic_World_2%5E$srv_v%5EMagicWorld2Server.zip
 
-# How much memory should the server use
-ENV srv_mem 768M
-
 # Create data folder and download server
 RUN mkdir /server
-RUN wget -A.jar "$srv_url" -O /server/minecraft_server.jar
+WORKDIR /server
+RUN wget -A.zip "$srv_url" -O magic_world_2.zip
+RUN unzip magic_world_2.zip
+RUN rm magic_world_2.zip *.bat *.sh
+
 # Mark data folder as volume
 VOLUME /data
+# Change execution environment to /data
+WORKDIR /data
 
 # Expose standard server port
 EXPOSE 25565
 
-WORKDIR /data
+# How much memory should the server use
+ENV srv_mem 768M
+
 # Start the server with previously set memory limit
 ENTRYPOINT /data/./entrypoint.sh
