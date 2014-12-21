@@ -17,9 +17,9 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true \
 RUN apt-get install -y wget
 
 # Which version of the server should be downloaded
-ENV srv_v 1.8.1
-ENV srv_url_base https://s3.amazonaws.com/Minecraft.Download/versions
-ENV srv_url $srv_url_base/$srv_v/minecraft_server.$srv_v.jar
+ENV srv_v 1_1_2
+ENV srv_url_base http://www.creeperrepo.net/FTB2/modpacks
+ENV srv_url $srv_url_base%5EMagic_World_2%5E$srv_v%5EMagicWorld2Server.zip
 
 # How much memory should the server use
 ENV srv_mem 768M
