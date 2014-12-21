@@ -13,7 +13,7 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 select true \
 	| debconf-set-selections && \
 	echo debconf shared/accepted-oracle-license-v1-1 seen true \
 	| debconf-set-selections  && \
-	apt-get -y install oracle-java8-installer
+	apt-get -y install oracle-java7-installer
 RUN apt-get install -y wget unzip
 
 # Which version of the server should be downloaded
